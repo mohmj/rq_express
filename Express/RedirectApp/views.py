@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+import sys
+from django.http import HttpRequest
 from pyrebase import pyrebase
 import firebase_admin
 from firebase_admin import firestore
@@ -10,9 +12,10 @@ firebaseConfig = {
   "messagingSenderId": "841781456816",
   "appId": "1:841781456816:web:b702055f9fd74f83c8b075",
   "measurementId": "G-YKEL44CZEH"
-};
-def redirect(request):
-    famous = request.GET.get("famous") or "no famous assigned"
+}
+# sys.setrecursionlimit(10000)
+def RedirectFunction(request):
+    # famous = request.GET.get("famous") or "no famous assigned"
     website = request.GET.get("website") or "https://google.com"
     return redirect(website)
     # return render(request,"RedirectApp_index.html",{"famous":famous,"website":website})
