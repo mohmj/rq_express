@@ -4,5 +4,5 @@ from django.shortcuts import render, redirect
 
 def redirect(request):
     famous = request.GET.get("famous") or "no famous assigned"
-    website = request.GET.get("website") or "no website addigned"
+    website = request.GET.get("website") or "no website assigned"
     return render("test working correctly, {0} & {1}".format(famous,website))
