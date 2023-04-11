@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-# from pyrebase import pyrebase
+from pyrebase import pyrebase
 
 
 def redirect(request):
