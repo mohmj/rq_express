@@ -1,9 +1,18 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 
+import firebase_admin
+from firebase_admin import firestore
+from firebase_admin import credentials
+cred = credentials.Certificate("serviceAccountKey.json")
+firebase_admin.initialize_app(cred)
+firestore_client = firestore.client()
+
+
 def RedirectFunction(request):
     # famous = request.GET.get("famous") or "no famous assigned"
     website = request.GET.get("website") or "https://google.com"
+    firestore_client.collection("news").add({"name":"ahmed", "age":40})
     return redirect(website)
     # return render(request,"RedirectApp_index.html",{"famous":famous,"website":website})
 
