@@ -17,8 +17,11 @@
 
     <div class="mb-3 form-control">
         <h5>Choose famous</h5>
-        {% for famous in {{famous_array}} : %}
-        <p>{% famous %}</p>
+        {% for famous in famous_array %}
+        <div class="mb-1">
+            <input type="checkbox" id={{famous.name_en}} name={{famous.name_en}} value="checked">
+            <label for={{famous.name_en}}>{{famous.name_ar}}</label><br>
+        </div>
         {% endfor %}
 
     </div>
