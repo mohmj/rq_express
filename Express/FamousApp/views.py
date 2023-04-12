@@ -18,4 +18,4 @@ def createFamous(request):
         "instagram":instagram,
         "twitter":twitter
     })
-    return redirect("http://3.83.172.110:8001/famous/new")
+    return render(request,"FamousApp/new_famous.html")
