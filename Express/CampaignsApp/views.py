@@ -4,7 +4,7 @@ import datetime
 import firebase_config
 # Create your views here.
 def newCampaign(request):
-    return render(request,"new_campaign.html")
+    return render(request,"CampaignsApp/new_campaign.html")
 
 def createNewCampaign(request):
     name_arabic=request.POST.get('name_Arabic')

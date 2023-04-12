@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Create new campaign</h3><br>
+<form action="/campaigns/createNewCampaign" method="post">
+{% csrf_token %}
+    <div class="mb-3 form-control">
+        <label for="name_English" class="form-label">Campaign name (English)</label>
+        <input id="name_English" name="name_English">
+        <br>
+        <label for="name_Arabic" class="form-label">Campaign name (Arabic)</label>
+        <input id="name_Arabic" name="name_Arabic">
+    </div>
+    <div class="mb-3 form-control">
+        <label for="link" class="form-label">Link</label>
+        <input id="link" name="link" type="url" value="https://">
+    </div>
+    <button type="submit" class="btn btn-primary">Create campaign</button>
+</form>
+{% endblock %}
