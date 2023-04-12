@@ -4,7 +4,13 @@ import datetime
 import firebase_config
 # Create your views here.
 def newCampaign(request):
-    return render(request,"CampaignsApp/new_campaign.html")
+    docs=firebase_config.firestore_client.collection('famous').stream()
+    famous_array=[]
+    for doc in docs:
+        famousDict=doc.to_dict()
+        famous_array.append({"name_ar":famousDict['name_ar'],"name_en":famousDict['name_en']})
+    print(famous_array)
+    return render(request,"CampaignsApp/new_campaign.html",{'famous_array':famous_array})
 
 def createNewCampaign(request):
     name_arabic=request.POST.get('name_Arabic')

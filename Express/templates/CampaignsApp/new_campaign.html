@@ -14,6 +14,15 @@
         <label for="link" class="form-label">Link</label>
         <input id="link" name="link" type="url" value="https://">
     </div>
+
+    <div class="mb-3 form-control">
+        <h5>Choose famous</h5>
+        {% for famous in {{famous_array}} : %}
+        <p>{% famous %}</p>
+        {% endfor %}
+
+    </div>
+
     <button type="submit" class="btn btn-primary">Create campaign</button>
 </form>
 {% endblock %}
