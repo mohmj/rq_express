@@ -22,5 +22,5 @@ urlpatterns = [
     path('',include("RedirectApp.urls")),
     path('campaigns/',include("CampaignsApp.urls")),
     path('famous/',include("FamousApp.urls")),
-    path('control',include("ControlApp.urls")),
+    path('control/',include("ControlApp.urls")),
 ]
