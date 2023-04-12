@@ -12,9 +12,12 @@ import firebase_config
 
 
 def RedirectFunction(request):
-    # famous = request.GET.get("famous") or "no famous assigned"
-    website = request.GET.get("website") or "https://google.com"
-    firebase_config.firestore_client.collection("news").add({"name":"ahmed", "age":40})
+    famous = request.GET.get("famous") or "no famous assigned"
+    website = "https://"+request.GET.get("website")
+    campaign=request.GET.get("campaign")
+    firebase_config.firestore_client.collection("campaigns").document(campaign).update({
+        "famous":{famous:firebase_config.firestore.Increment(1)}
+    })
     return redirect(website)
     # return render(request,"RedirectApp_index.html",{"famous":famous,"website":website})
 
