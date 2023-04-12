@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include("RedirectApp.urls")),
     path('campaigns/',include("CampaignsApp.urls")),
-    path('famous/',include("FamousApp.urls"))
+    path('famous/',include("FamousApp.urls")),
+    path('control',include("ControlApp.urls")),
 ]
