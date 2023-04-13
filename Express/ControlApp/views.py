@@ -12,7 +12,7 @@ def campaignsPage(request):
      docs = firebase_config.firestore_client.collection('campaigns').stream()
      for doc in docs:
          campaignsDict = doc.to_dict()
-         campaignsArray.append({"name_ar": campaignsDict['name_ar'], "name_en": campaignsDict['name_en'], "link":campaignsDict['link'], "start_time":"00/00/0000", "end_time":"0"})
+         campaignsArray.append({"company":campaignsDict['company'],"name_ar": campaignsDict['name_ar'], "name_en": campaignsDict['name_en'], "link":campaignsDict['link'], "start_time":"00/00/0000", "end_time":"0"})
      return render(request,"ControlApp/campaigns.html",{"campaignsArray":campaignsArray})
 
 def showCampaign(request):
