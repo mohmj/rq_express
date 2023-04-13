@@ -6,4 +6,5 @@ urlpatterns=[
     path('campaigns', views.campaignsPage),
     path('famous', views.famousPage),
     path('campaigns/campaignShow',views.showCampaign),
+    path('campaigns/newCampaign',views.createNewCampaign)
 ]

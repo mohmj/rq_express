@@ -16,6 +16,7 @@ def createNewCampaign(request):
     name_arabic=request.POST.get('name_Arabic')
     name_english=request.POST.get('name_English')
     link=request.POST.get('link')
+    company=request.POST.get('company')
     famous_choose:dict[str,int]= {} # famous we choosed for this campaign .
     for item in famous_array:
         itemstatus=request.POST.get(item["name_en"])
@@ -29,7 +30,8 @@ def createNewCampaign(request):
         "link":link,
         "start_time":firebase_config.firestore.SERVER_TIMESTAMP,
         "famous":famous_choose,
+        "company":company,
     })
 
-    return HttpResponse("<h1> Campaign {} added successfully.".format(name_english))
+    return redirect("http://3.83.172.110:8001/control/campaigns")
 

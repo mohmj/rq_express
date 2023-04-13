@@ -4,6 +4,10 @@
 <form action="/campaigns/createNewCampaign" method="post">
 {% csrf_token %}
     <div class="mb-3 form-control">
+        <label for="company" class="form-label">company</label>
+        <input id="company" name="company" type="text" value="">
+    </div>
+    <div class="mb-3 form-control">
         <label for="name_English" class="form-label">Campaign name (English)</label>
         <input id="name_English" name="name_English">
         <br>
