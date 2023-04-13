@@ -16,13 +16,13 @@ def createNewCampaign(request):
     name_arabic=request.POST.get('name_Arabic')
     name_english=request.POST.get('name_English')
     link=request.POST.get('link')
-    famous_choose= {} # famous we choosed for this campaign .
+    famous_choose:dict[str,int]= {} # famous we choosed for this campaign .
     for item in famous_array:
         itemstatus=request.POST.get(item["name_en"])
         if(itemstatus=="checked"):
             # print(item["name_en"])
             famous_choose[item['name_en']]=0
-
+    famous_array.clear()
     firebase_config.firestore_client.collection("campaigns").document(name_english).set({
         "name_ar":name_arabic,
         "name_en":name_english,
