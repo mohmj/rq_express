@@ -7,6 +7,7 @@ def indexPage(request):
     return render(request,"ControlApp/index.html")
 
 campaignsArray=[]
+famousArray=[]
 def campaignsPage(request):
      campaignsArray.clear()
      docs = firebase_config.firestore_client.collection('campaigns').stream()
@@ -27,4 +28,14 @@ def createNewCampaign(request):
     return redirect("http://3.83.172.110:8001/campaigns/new")
 
 def famousPage(request):
-    return render(request,"ControlApp/famous.html")
+    famousArray.clear()
+    docs = firebase_config.firestore_client.collection('famous').stream()
+    for doc in docs:
+        famousDict = doc.to_dict()
+        famousArray.append({"name_ar": famousDict['name_ar'],
+                               "name_en": famousDict['name_en'], "snapchat": famousDict['snapchat'],
+                               "instagram": famousDict['instagram'],"twitter": famousDict['twitter'],})
+    return render(request,"ControlApp/famous.html",{"famousArray":famousArray})
+
+def addNewFamous(request):
+    return redirect("http://3.83.172.110:8001/famous/new")

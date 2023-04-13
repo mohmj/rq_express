@@ -4,7 +4,9 @@ from . import views
 urlpatterns=[
     path('',views.indexPage),
     path('campaigns', views.campaignsPage),
-    path('famous', views.famousPage),
     path('campaigns/campaignShow',views.showCampaign),
-    path('campaigns/newCampaign',views.createNewCampaign)
+    path('campaigns/newCampaign',views.createNewCampaign),
+
+    path('famous', views.famousPage),
+    path('famous/newFamous', views.addNewFamous)
 ]

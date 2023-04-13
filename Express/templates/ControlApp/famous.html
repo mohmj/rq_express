@@ -1,5 +1,76 @@
 {% extends 'base.html' %}
 {% block content %}
 {% csrf_token %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Famous</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon">dd</span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      </ul>
+      <form class="d-flex" role="search" action="/control/famous/new">
+        <button class="btn btn-outline-success" type="submit">Add new famous</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<table class="table"  style="text-align:center">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">name</th>
+      <th scope="col">Platforms</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
 
+  <tbody>
+  {% for famous in famousArray %}
+    <tr>
+      <th scope="row">{{famous.name_en}}</th>
+      <td>{{famous.name_ar}}</td>
+      <td>
+        {% if famous.snapchat %}
+        <i class="fa-brands fa-snapchat" style="color: #000000;"></i>
+        {% endif %}
+        {% if famous.instagram %}
+        <i class="fa-brands fa-instagram" style="color: #000000;"></i>
+        {% endif %}
+        {% if famous.twitter %}
+        <i class="fa-brands fa-twitter" style="color: #000000;"></i>
+        {% endif %}
+      </td>
+      <td>
+        <table>
+          <tr>
+            <td>
+             <form action="/control/campaigns/campaignShow?id={{campaign.name_en}}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary" disabled>Show</button>
+        </form>
+            </td>
+            <td>
+              <form action="/control/campaigns/campaignEdit?id={{campaign.name_en}}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-warning" disabled>Edit</button>
+        </form>
+            </td>
+            <td>
+              <form action="/control/campaigns/campaignEdit?id={{campaign.name_en}}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger" disabled>Delete</button>
+        </form>
+            </td>
+          </tr>
+        </table>
+
+
+
+      </td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
 {% endblock %}
