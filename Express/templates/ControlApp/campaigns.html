@@ -29,7 +29,7 @@
   {% for campaign in campaignsArray %}
     <tr>
       <th scope="row">{{campaign.name_ar}}</th>
-      <td>company</td>
+      <td>{{campaign.company}}</td>
       <td>{{campaign.start_time}}</td>
       <td>
         <form action="/control/campaigns/campaignShow?id={{campaign.name_en}}" method="post">
