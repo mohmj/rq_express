@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="8f08ec81-4405-42a6-84fa-4051df342fb7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Express/CampaignsApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Express/CampaignsApp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Express/ControlApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Express/ControlApp/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Express/ControlApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Express/ControlApp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Express/templates/ControlApp/campaigns.html" beforeDir="false" afterPath="$PROJECT_DIR$/Express/templates/ControlApp/campaigns.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Express/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Express/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
