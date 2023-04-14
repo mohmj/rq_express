@@ -49,15 +49,21 @@
 </table>
 
 </div>
-
-<div class="mb-3 form-control">
-        <h5>Add new famous</h5>
-        {% for famous in notAddedFamous %}
-        <div class="mb-1">
-            <input type="checkbox" id={{famous.name_en}} name={{famous.name_en}} value="checked">
-            <label for={{famous.name_en}}>{{famous.name_ar}}</label><br>
-        </div>
-        {% endfor %}
-    </div>
+{% if not notAddedFamous %}
+{% else %}
+<!--<div class="mb-3 form-control">-->
+<!--        <h5>Add new famous</h5>-->
+<!--        {% for famous in notAddedFamous %}-->
+<!--        <div class="mb-1">-->
+<!--            <input type="checkbox" id={{famous.name_en}} name={{famous.name_en}} value="checked">-->
+<!--            <label for={{famous.name_en}}>{{famous.name_ar}}</label><br>-->
+<!--        </div>-->
+<!--        {% endfor %}-->
+<!--    <form action="/control/campaigns/campaignUpdate" method="post">-->
+<!--                {% csrf_token %}-->
+<!--                <button type="submit" class="btn btn-primary" >Add </button>-->
+<!--            </form>-->
+<!--    </div>-->
+{% endif %}
 
 {% endblock %}

@@ -10,6 +10,7 @@ def indexPage(request):
 campaignsArray=[]
 famousArray=[]
 notAddedFamous=[]
+campaign={}
 def campaignsPage(request):
      campaignsArray.clear()
      docs = firebase_config.firestore_client.collection('campaigns').order_by("start_time", direction=firebase_config.firestore.Query.DESCENDING).stream()
@@ -45,6 +46,12 @@ def editCampaign(request):
             continue
         notAddedFamous.append({"name_en":fam['name_en'], "name_ar":fam['name_ar']})
     return render(request,"ControlApp/campaign_edit.html",{"campaign":campaign,"currentFamousArray":currentFamousArray, "notAddedFamous":notAddedFamous})
+
+def updateCampaign(request):
+
+    firebase_config.firestore_client.collection("campaigns").document(campaign['name_en']).update({
+
+    })
 
 def famousPage(request):
     famousArray.clear()
