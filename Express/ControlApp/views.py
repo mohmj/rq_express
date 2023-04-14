@@ -31,6 +31,7 @@ def createNewCampaign(request):
     return redirect("http://3.83.172.110:8001/campaigns/new")
 
 def editCampaign(request):
+    notAddedFamous=[]
     campaign=firebase_config.firestore_client.collection("campaigns").document(str(request.GET.get('id'))).get().to_dict()
     campaign['start_time']=datetime.datetime.fromtimestamp(campaign['start_time'].timestamp(),pytz.timezone('Asia/Riyadh')).strftime("%m-%d-%Y %H:%M:%S")
     currentFamousArray=[]
