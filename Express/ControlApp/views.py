@@ -4,7 +4,7 @@ from django.shortcuts import render,redirect
 import firebase_config
 
 def indexPage(request):
-    return render(request,"ControlApp/index.html")
+    return render(request,"ControlApp/campaigns.html")
 
 campaignsArray=[]
 famousArray=[]
