@@ -1,6 +1,8 @@
 import datetime,pytz
 
 from django.shortcuts import render,redirect
+
+import appConfig
 import firebase_config
 
 def indexPage(request):
@@ -48,10 +50,19 @@ def editCampaign(request):
     return render(request,"ControlApp/campaign_edit.html",{"campaign":campaign,"currentFamousArray":currentFamousArray, "notAddedFamous":notAddedFamous})
 
 def updateCampaign(request):
+    famousChoose:dict[str,int]={}
+    for item in famousArray:
+        checkStatus=request.POST.get(item['name_en'])
+        if(checkStatus=="checked"):
+            famousChoose[item['name_en']]=0
 
-    firebase_config.firestore_client.collection("campaigns").document(campaign['name_en']).update({
+    for k,v in famousChoose.items():
 
-    })
+        firebase_config.firestore_client.collection("campaigns").document(campaign['name_en']).set({
+        "famous."+k:0
+        })
+
+    return redirect(appConfig.appUrl+"control/campaigns")
 
 def famousPage(request):
     famousArray.clear()
