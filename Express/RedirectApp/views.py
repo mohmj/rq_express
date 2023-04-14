@@ -16,10 +16,10 @@ def RedirectFunction(request):
     website = request.GET.get("website")
     campaign=request.GET.get("campaign")
     firebase_config.firestore_client.collection("campaigns").document(campaign).update({
-        "famous":{famous:firebase_config.Increment(1)}
+        "famous."+famous:firebase_config.Increment(1)
     })
     firebase_config.firestore_client.collection("famous").document(famous).update({
-        "campaigns": {campaign: firebase_config.Increment(1)}
+        "campaigns."+campaign: firebase_config.Increment(1)
     })
 
     return redirect(website)
