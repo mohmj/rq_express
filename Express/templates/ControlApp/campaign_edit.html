@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">{{campaign.name_ar}}</a>
+    </div>
+</nav>
+
+<table class="table" >
+    <tr>
+        <th>Company</th>
+        <td style="text-align:center">{{campaign.company}}</td>
+        <th>id</th>
+        <td style="text-align:center">{{campaign.name_en}}</td>
+    </tr>
+    <tr>
+        <th>name</th>
+        <td style="text-align:center">{{campaign.name_ar}}</td>
+        <th>Start at</th>
+        <td style="text-align:center">{{campaign.start_time}}</td>
+    </tr>
+    <tr>
+    </tr>
+</table>
+
+<div>
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">name</th>
+      <th scope="col">views</th>
+        <th scope="col">link</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for fam in currentFamousArray %}
+    <tr>
+      <th>{{fam.name_en}}</th>
+      <td>{{fam.name_ar}}</td>
+      <td>{{fam.clicks}}</td>
+        <td>
+                        http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}
+                    </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+</div>
+
+<div class="mb-3 form-control">
+        <h5>Add new famous</h5>
+        {% for famous in notAddedFamous %}
+        <div class="mb-1">
+            <input type="checkbox" id={{famous.name_en}} name={{famous.name_en}} value="checked">
+            <label for={{famous.name_en}}>{{famous.name_ar}}</label><br>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
