@@ -11,7 +11,7 @@ campaignsArray=[]
 famousArray=[]
 def campaignsPage(request):
      campaignsArray.clear()
-     docs = firebase_config.firestore_client.collection('campaigns').stream()
+     docs = firebase_config.firestore_client.collection('campaigns').order_by("start_time").stream()
      for doc in docs:
          campaignsDict = doc.to_dict()
          campaignsArray.append({"company":campaignsDict['company'],"name_ar": campaignsDict['name_ar'], "name_en": campaignsDict['name_en'], "link":campaignsDict['link'], "start_time":"00/00/0000", "end_time":"0", "famous":campaignsDict['famous']})
@@ -27,6 +27,9 @@ def showCampaign(request):
 
 def createNewCampaign(request):
     return redirect("http://3.83.172.110:8001/campaigns/new")
+
+def editCampaign(request):
+    return "a"
 
 def famousPage(request):
     famousArray.clear()
