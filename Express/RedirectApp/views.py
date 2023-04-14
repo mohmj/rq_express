@@ -13,7 +13,7 @@ import firebase_config
 
 def RedirectFunction(request):
     famous = request.GET.get("famous") or "no famous assigned"
-    website = "https://"+request.GET.get("website")
+    website = request.GET.get("website")
     campaign=request.GET.get("campaign")
     firebase_config.firestore_client.collection("campaigns").document(campaign).update({
         "famous":{famous:firebase_config.firestore.Increment(1)}
