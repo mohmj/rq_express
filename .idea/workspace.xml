@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f08ec81-4405-42a6-84fa-4051df342fb7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Express/templates/ControlApp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Express/templates/ControlApp/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Express/FamousApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Express/FamousApp/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
