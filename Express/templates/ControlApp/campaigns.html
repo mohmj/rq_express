@@ -1,48 +1,85 @@
 {% extends 'base.html' %}
 {% block content %}
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Campaigns</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon">dd</span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      </ul>
-      <form class="d-flex" role="search" action="/control/campaigns/newCampaign">
-        <button class="btn btn-outline-success" type="submit">Create new campaign</button>
-      </form>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Campaigns</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">dd</span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </ul>
+            <form class="d-flex" role="search" action="/control/campaigns/newCampaign">
+                <button class="btn btn-outline-success" type="submit">Create new campaign</button>
+            </form>
+        </div>
     </div>
-  </div>
 </nav>
-<table class="table"  style="text-align:center">
-  <thead>
+<table class="table" style="text-align:center">
+    <thead>
     <tr>
-      <th scope="col">Campaign</th>
-      <th scope="col">Company</th>
-      <th scope="col">Start time</th>
-      <th scope="col">Actions</th>
+        <th scope="col">Campaign</th>
+        <th scope="col">Company</th>
+        <th scope="col">Start time</th>
+        <th scope="col">Famous</th>
+<!--        <th scope="col">Actions</th>-->
     </tr>
-  </thead>
-  <tbody>
-  <tbody>
-  {% for campaign in campaignsArray %}
+    </thead>
+    <tbody>
+    <tbody>
+    {% for campaign in campaignsArray %}
     <tr>
-      <th scope="row">{{campaign.name_ar}}</th>
-      <td>{{campaign.company}}</td>
-      <td>{{campaign.start_time}}</td>
-      <td>
-        <form action="/control/campaigns/campaignShow?id={{campaign.name_en}}" method="post">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-primary" disabled>Show</button>
-        </form>
-        <form action="/control/campaigns/campaignEdit?id={{campaign.name_en}}" method="post">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-warning" disabled>Edit</button>
-        </form>
-      </td>
+        <th scope="row">{{campaign.name_ar}}</th>
+        <td>{{campaign.company}}</td>
+        <td>{{campaign.start_time}}</td>
+        <td>
+            <table class="table" style="text-align:center">
+                <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">clicks</th>
+                    <th scope="col">link</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for k,v in campaign.famous.items %}
+                <tr>
+                    <td>{{k}}</td>
+                    <td>{{v}}</td>
+                    <td>
+                        http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{k}}&website={{campaign.link}}
+                    </td>
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </td>
+<!--        <td>-->
+<!--            <form action="/control/campaigns/campaignShow?id={{campaign.name_en}}" method="post">-->
+<!--                {% csrf_token %}-->
+<!--                <button type="submit" class="btn btn-primary" disabled>Show</button>-->
+<!--            </form>-->
+<!--            <form action="/control/campaigns/campaignEdit?id={{campaign.name_en}}" method="post">-->
+<!--                {% csrf_token %}-->
+<!--                <button type="submit" class="btn btn-warning" disabled>Edit</button>-->
+<!--            </form>-->
+<!--        </td>-->
+        <td>
+
+        </td>
     </tr>
-{% endfor %}
-  </tbody>
+    <tr>
+    </tr>
+    {% endfor %}
+    </tbody>
 </table>
+
+{% block scripts %}
+<script>
+
+</script>
+{% endblock scripts %}
+
 {% endblock %}
