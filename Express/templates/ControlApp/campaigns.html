@@ -27,7 +27,6 @@
         <th scope="col">Campaign</th>
         <th scope="col">Company</th>
         <th scope="col">Date</th>
-        <th scope="col">Famous</th>
         <th scope="col">Actions</th>
     </tr>
     </thead>
@@ -37,29 +36,6 @@
         <th scope="row">{{campaign.name_ar}}</th>
         <td>{{campaign.company}}</td>
         <td>{{campaign.start_time}}</td>
-        <td>
-            <table class="table" style="text-align:center">
-                <thead>
-                <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">clicks</th>
-                    <th scope="col">link</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for k,v in campaign.famous.items %}
-                <tr>
-                    <td>{{k}}</td>
-                    <td>{{v}}</td>
-                    <td>
-                        http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{k}}&website={{campaign.link}}
-                    </td>
-
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </td>
         <td>
             <form action="/control/campaigns/campaignEdit?id={{campaign.name_en}}" method="post">
                 {% csrf_token %}
