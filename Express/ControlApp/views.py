@@ -51,6 +51,7 @@ def editCampaign(request):
 
 def updateCampaign(request):
     famousChoose:dict[str,int]={}
+    campaignId=request.GET.get("id")
     for item in famousArray:
         checkStatus=request.POST.get(item['name_en'])
         if(checkStatus=="checked"):
@@ -58,7 +59,7 @@ def updateCampaign(request):
 
     for k,v in famousChoose.items():
 
-        firebase_config.firestore_client.collection("campaigns").document(campaign['name_en']).set({
+        firebase_config.firestore_client.collection("campaigns").document(campaignId).set({
         "famous."+k:0
         })
 
