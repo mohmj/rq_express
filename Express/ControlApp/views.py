@@ -4,7 +4,8 @@ from django.shortcuts import render,redirect
 import firebase_config
 
 def indexPage(request):
-    return render(request,"ControlApp/campaigns.html")
+    # return render(request,"ControlApp/index.html")
+    return redirect("http://3.83.172.110:8001/control/campaigns")
 
 campaignsArray=[]
 famousArray=[]
