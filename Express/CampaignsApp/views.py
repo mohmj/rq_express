@@ -3,7 +3,7 @@ from django.http import HttpResponse
 import datetime
 import firebase_config
 # Create your views here.
-
+from django_user_agents.utils import get_user_agent
 famous_array=[]
 def newCampaign(request):
     docs=firebase_config.firestore_client.collection('famous').stream()
@@ -13,6 +13,7 @@ def newCampaign(request):
     return render(request,"CampaignsApp/new_campaign.html",{'famous_array':famous_array})
 
 def createNewCampaign(request):
+    user_agent=get_user_agent(request)
     name_arabic=request.POST.get('name_Arabic')
     name_english=request.POST.get('name_English')
     link=request.POST.get('link')
@@ -24,6 +25,7 @@ def createNewCampaign(request):
             # print(item["name_en"])
             famous_choose[item['name_en']]=0
     famous_array.clear()
+    print(request.user_agent.os.family)
     firebase_config.firestore_client.collection("campaigns").document(name_english).set({
         "name_ar":name_arabic,
         "name_en":name_english,
