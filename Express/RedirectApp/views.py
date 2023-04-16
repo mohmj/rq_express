@@ -17,8 +17,8 @@ def RedirectFunction(request):
     famous = request.GET.get("famous") or "no famous assigned"
     website = request.GET.get("website")
     campaign=request.GET.get("campaign")
-    firebase_config.firestore_client.collection("campaigns").document(campaign).set({
-        "famous."+famous:{
+    firebase_config.firestore_client.collection("campaigns").document(campaign).update({
+        "famous"+famous:{
             "views":firebase_config.Increment(1),
             "device":{str(user_agent.device.brand):firebase_config.Increment(1)},
             "Browser":{str(user_agent.browser.family):firebase_config.Increment(1)},
