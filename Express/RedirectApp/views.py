@@ -20,7 +20,7 @@ def RedirectFunction(request):
     firebase_config.firestore_client.collection("campaigns").document(campaign).set({
         "famous."+famous:{
             "views":firebase_config.Increment(1),
-            "device.":{str(user_agent.device.brand):firebase_config.Increment(1)},
+            "device."+str(user_agent.device.brand):firebase_config.Increment(1),
             "Browser.":{str(user_agent.browser.family):firebase_config.Increment(1)},
             "OS.":{str(user_agent.os.family):firebase_config.Increment(1)},
         }
