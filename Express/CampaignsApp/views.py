@@ -14,7 +14,7 @@ def newCampaign(request):
 
 def createNewCampaign(request):
     user_agent=get_user_agent(request)
-    return HttpResponse(str(user_agent.device.family)+"\n"+str(user_agent.browser.family)+"\n"+str(user_agent.os))
+    return HttpResponse("<h3>"+str(user_agent.device)+"</h3>\n<h3><"+str(user_agent.browser)+"</h3>\n<h3><"+str(user_agent.os)+"</h3>")
     name_arabic=request.POST.get('name_Arabic')
     name_english=request.POST.get('name_English')
     link=request.POST.get('link')
