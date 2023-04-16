@@ -22,7 +22,7 @@ def RedirectFunction(request):
             "views":firebase_config.Increment(1),
             "device."+str(user_agent.device.brand):firebase_config.Increment(1),
             "Browser."+str(user_agent.browser.family):firebase_config.Increment(1),
-            "OS."+str(+user_agent.os.family):firebase_config.Increment(1),
+            "OS."+str(user_agent.os.family):firebase_config.Increment(1),
         }
 
     })
@@ -30,7 +30,7 @@ def RedirectFunction(request):
         "campaigns."+campaign: firebase_config.Increment(1)
     })
 
-    return redirect(website)
+    # return redirect(website)
     # return render(request,"RedirectApp_index.html",{"famous":famous,"website":website})
 
 def LoginPage(request):
