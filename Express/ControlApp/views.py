@@ -57,11 +57,15 @@ def updateCampaign(request):
         if(checkStatus=="checked"):
             famousChoose[item['name_en']]=0
 
-    for k,v in famousChoose.items():
 
-        firebase_config.firestore_client.collection("campaigns").document(campaignId).set({
-        "famous."+k:0
-        })
+
+    for k,v in famousChoose.items():
+        print(k+"\n")
+
+    print(len(famousChoose))
+        # firebase_config.firestore_client.collection("campaigns").document(campaignId).set({
+        # "famous."+k:0
+        # })
 
     return redirect(appConfig.appUrl+"control/campaigns")
 
