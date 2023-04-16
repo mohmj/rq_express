@@ -40,7 +40,20 @@ def editCampaign(request):
     currentFamousArray=[]
     for k,v in campaign['famous'].items():
         famous=firebase_config.firestore_client.collection("famous").document(str(k)).get().to_dict()
-        currentFamousArray.append({"name_en":str(k), "name_ar":famous['name_ar'], 'clicks':str(v)})
+        totalViews=v["views"]
+        appleViews=0
+        androidViews=0
+        if "Apple" in v["device"]:
+            appleViews = int(v['device']['Apple'])
+        if "Android" in v['OS']:
+            androidViews = v['OS']['Android']
+        elseDevicesViews=totalViews-androidViews-appleViews
+        currentFamousArray.append({"name_en":str(k), "name_ar":famous['name_ar'], 'views':{
+            'total':totalViews,
+            'apple':appleViews,
+            'android':androidViews,
+            'else':elseDevicesViews
+        }})
     famous=firebase_config.firestore_client.collection("famous").stream()
     for doc in famous:
         fam=doc.to_dict()

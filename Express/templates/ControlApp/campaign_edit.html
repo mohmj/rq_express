@@ -30,8 +30,11 @@
     <tr>
       <th scope="col">id</th>
       <th scope="col">name</th>
-      <th scope="col">views</th>
-        <th scope="col">link</th>
+      <th scope="col" style="text-align:center">views</th>
+      <th scope="col" style="text-align:center"><i class="fa-brands fa-apple" style="color: #000000;padding:0px 5px 0px 5px" ></i></th>
+      <th scope="col"  style="text-align:center"><i class="fa-brands fa-android" style="color: #000000;padding:0px 5px 0px 5px"></i></th>
+      <th scope="col" style="text-align:center">else</th>
+      <th scope="col">link</th>
     </tr>
   </thead>
   <tbody>
@@ -39,7 +42,11 @@
     <tr>
       <th>{{fam.name_en}}</th>
       <td>{{fam.name_ar}}</td>
-      <td>{{fam.clicks}}</td>
+      <td style="text-align:center">{{fam.views.total}}</td>
+      <td style="text-align:center">{{fam.views.apple}}</td>
+      <td style="text-align:center">{{fam.views.android}}</td>
+      <td style="text-align:center">{{fam.views.else}}</td>
+
         <td>
                         http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}
                     </td>
