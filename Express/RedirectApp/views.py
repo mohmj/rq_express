@@ -30,7 +30,7 @@ def RedirectFunction(request):
         "campaigns."+campaign: firebase_config.Increment(1)
     })
 
-    # return redirect(website)
+    return redirect(website)
     # return render(request,"RedirectApp_index.html",{"famous":famous,"website":website})
 
 def LoginPage(request):
