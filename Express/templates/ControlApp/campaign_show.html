@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">{{campaign.name_ar}}</a>
+        {% if not notAddedFamous %}
+{% else %}
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </ul>
+            <form class="d-flex" role="search" action="/control/campaigns/campaignEdit?id={{campaign.name_en}}">
+                <button class="btn btn-outline-warning" type="submit" disabled>Edit</button>
+            </form>
+        </div>
+        {% endif %}
+
+    </div>
+
+</nav>
+
+<table class="table" style="text-align:center; vertical-align:center">
+    <tr>
+        <th>Company</th>
+        <td style="text-align:center">{{campaign.company}}</td>
+        <th>id</th>
+        <td style="text-align:center">{{campaign.name_en}}</td>
+    </tr>
+    <tr>
+        <th>name</th>
+        <td style="text-align:center">{{campaign.name_ar}}</td>
+        <th>Start at</th>
+        <td style="text-align:center">{{campaign.start_time}}</td>
+    </tr>
+    <tr>
+    </tr>
+</table>
+
+<div>
+
+    <table class="table" style="text-align:center;">
+  <thead>
+    <tr>
+      <th scope="col" rowspan="2" style="vertical-align:middle;">id</th>
+      <th scope="col" rowspan="2" style="vertical-align:middle;">name</th>
+           <th scope="col" colspan="4">views</th>
+      <th scope="col" rowspan="2" style="vertical-align:middle;">link</th>
+    </tr>
+    <tr>
+<!--        <th></th>-->
+<!--        <th></th>-->
+         <th scope="col" style="text-align:center">total</th>
+      <th scope="col" style="text-align:center"><i class="fa-brands fa-apple" style="color: #000000;padding:0px 5px 0px 5px" ></i></th>
+      <th scope="col"  style="text-align:center"><i class="fa-brands fa-android" style="color: #000000;padding:0px 5px 0px 5px"></i></th>
+      <th scope="col" style="text-align:center">else</th>
+<!--        <th></th>-->
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for fam in currentFamousArray %}
+    <tr>
+      <th>{{fam.name_en}}</th>
+      <td>{{fam.name_ar}}</td>
+      <td style="text-align:center">{{fam.views.total}}</td>
+      <td style="text-align:center">{{fam.views.apple}}</td>
+      <td style="text-align:center">{{fam.views.android}}</td>
+      <td style="text-align:center">{{fam.views.else}}</td>
+
+        <td>
+                        http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}
+                    </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+</div>
+
+
+
+{% endblock %}

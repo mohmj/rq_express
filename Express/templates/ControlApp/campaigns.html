@@ -37,7 +37,7 @@
         <td>{{campaign.company}}</td>
         <td>{{campaign.start_time}}</td>
         <td>
-            <form action="/control/campaigns/campaignEdit?id={{campaign.name_en}}" method="post">
+            <form action="/control/campaigns/campaignShow?id={{campaign.name_en}}" method="post">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-primary" >Show</button>
             </form>

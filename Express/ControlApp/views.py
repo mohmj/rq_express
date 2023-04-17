@@ -22,18 +22,11 @@ def campaignsPage(request):
          campaignsArray.append({"company":campaignsDict['company'],"name_ar": campaignsDict['name_ar'], "name_en": campaignsDict['name_en'], "link":campaignsDict['link'], "start_time":start_time, "end_time":"0", "famous":campaignsDict['famous']})
      return render(request,"ControlApp/campaigns.html",{"campaignsArray":campaignsArray})
 
-def showCampaign(request):
-
-    # id=request.POST.get("id")
-    # print("The id: "+id)
-    campaignData=firebase_config.firestore_client.collection("campaigns").document("sinjar_eid").get()
-    print("The type is"+str(type(campaignData)))
-    return (request,"ControlApp/campaign_show",{"campaign":campaignData})
 
 def createNewCampaign(request):
     return redirect("http://3.83.172.110:8001/campaigns/new")
 
-def editCampaign(request):
+def showCampaign(request):
     notAddedFamous=[]
     campaign=firebase_config.firestore_client.collection("campaigns").document(str(request.GET.get('id'))).get().to_dict()
     campaign['start_time']=datetime.datetime.fromtimestamp(campaign['start_time'].timestamp(),pytz.timezone('Asia/Riyadh')).strftime("%m-%d-%Y %H:%M:%S")
@@ -60,7 +53,11 @@ def editCampaign(request):
         if any(fam['name_en'] in d.values() for d in currentFamousArray):
             continue
         notAddedFamous.append({"name_en":fam['name_en'], "name_ar":fam['name_ar']})
-    return render(request,"ControlApp/campaign_edit.html",{"campaign":campaign,"currentFamousArray":currentFamousArray, "notAddedFamous":notAddedFamous})
+    return render(request,"ControlApp/campaign_show.html",{"campaign":campaign,"currentFamousArray":currentFamousArray, "notAddedFamous":notAddedFamous})
+
+def editCampaign(request):
+    editId=request.POST.get("id")
+    return render("ControlApp/campaign_edit.html",{"id":editId})
 
 def updateCampaign(request):
     famousChoose:dict[str,int]={}
