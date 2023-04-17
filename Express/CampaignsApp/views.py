@@ -24,7 +24,7 @@ def createNewCampaign(request):
         itemstatus=request.POST.get(item["name_en"])
         if(itemstatus=="checked"):
             # print(item["name_en"])
-            famous_choose[item['name_en']]={"views":0}
+            famous_choose[item['name_en']]={"views":0,"Browser":{},"OS":{},"device":{}}
     famous_array.clear()
     firebase_config.firestore_client.collection("campaigns").document(name_english).set({
         "name_ar":name_arabic,
