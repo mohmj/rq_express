@@ -31,16 +31,24 @@ def showCampaign(request):
     campaign=firebase_config.firestore_client.collection("campaigns").document(str(request.GET.get('id'))).get().to_dict()
     campaign['start_time']=datetime.datetime.fromtimestamp(campaign['start_time'].timestamp(),pytz.timezone('Asia/Riyadh')).strftime("%m-%d-%Y %H:%M:%S")
     currentFamousArray=[]
+    viewstotal=0
+    viewsApple=0
+    viewsAndroid=0
+    viewsElse=0
     for k,v in campaign['famous'].items():
         famous=firebase_config.firestore_client.collection("famous").document(str(k)).get().to_dict()
         totalViews=v["views"]
+        viewstotal+=totalViews
         appleViews=0
         androidViews=0
         if "Apple" in v["device"]:
             appleViews = int(v['device']['Apple'])
+            viewsApple+=appleViews
         if "Android" in v['OS']:
             androidViews = v['OS']['Android']
+            viewsAndroid+=androidViews
         elseDevicesViews=totalViews-androidViews-appleViews
+        viewsElse=viewstotal-viewsApple-viewsAndroid
         currentFamousArray.append({"name_en":str(k), "name_ar":famous['name_ar'], 'views':{
             'total':totalViews,
             'apple':appleViews,
@@ -53,7 +61,12 @@ def showCampaign(request):
         if any(fam['name_en'] in d.values() for d in currentFamousArray):
             continue
         notAddedFamous.append({"name_en":fam['name_en'], "name_ar":fam['name_ar']})
-    return render(request,"ControlApp/campaign_show.html",{"campaign":campaign,"currentFamousArray":currentFamousArray, "notAddedFamous":notAddedFamous})
+    return render(request,"ControlApp/campaign_show.html",{"campaign":campaign,"currentFamousArray":currentFamousArray, "notAddedFamous":notAddedFamous, "views":{
+        "total":viewstotal,
+        "apple":viewsApple,
+        "android":viewsAndroid,
+        "else":viewsElse,
+    }})
 
 def editCampaign(request):
     editId=request.POST.get("id")
