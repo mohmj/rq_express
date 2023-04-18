@@ -94,7 +94,7 @@ def updateCampaign(request):
     firebase_config.firestore_client.collection("campaigns").document(id).set({
        "famous":famous_choose
     },merge=True)
-    return redirect("127.0.0.1:8000/"+"control/campaigns")
+    return redirect(appConfig.appUrl+"control/campaigns")
 
 def famousPage(request):
     famousArray.clear()
