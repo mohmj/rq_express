@@ -3,29 +3,27 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">{{campaign.name_ar}}</a>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            </ul>
-            <form class="d-flex" role="search" action="/control/campaigns/newCampaign">
-                <button class="btn btn-outline-warning" type="submit">Edit</button>
-            </form>
-        </div>
+
     </div>
 
 </nav>
 
+{{campaign.name_en}}
+
+<form action="/control/campaigns/campaignUpdate?id={{campaign.name_en}}" method="post">
+                {% csrf_token %}
 <div class="mb-3 form-control">
         <h5>Add new famous</h5>
-        {% for famous in notAddedFamous %}
+        {% for famous in famousArray%}
         <div class="mb-1">
             <input type="checkbox" id={{famous.name_en}} name={{famous.name_en}} value="checked">
             <label for={{famous.name_en}}>{{famous.name_ar}}</label><br>
         </div>
         {% endfor %}
-    <form action="/control/campaigns/campaignUpdate" method="post">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-primary" >Add </button>
-            </form>
+
+                <button type="submit" class="btn btn-outline-primary">Add </button>
+
     </div>
+</form>
 
 {% endblock %}

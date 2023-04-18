@@ -8,8 +8,9 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             </ul>
-            <form class="d-flex" role="search" action="/control/campaigns/campaignEdit?id={{campaign.name_en}}">
-                <button class="btn btn-outline-warning" type="submit" disabled>Edit</button>
+            <form class="d-flex" role="search" action="/control/campaigns/campaignEdit?id={{campaign.name_en}}" method="post">
+                 {% csrf_token %}
+                <button class="btn btn-outline-warning" type="submit" >Edit</button>
             </form>
         </div>
         {% endif %}

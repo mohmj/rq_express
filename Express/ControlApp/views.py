@@ -5,9 +5,11 @@ from django.shortcuts import render,redirect
 import appConfig
 import firebase_config
 
+from django.http import HttpResponse
+
 def indexPage(request):
     # return render(request,"ControlApp/index.html")
-    return redirect("http://3.83.172.110:8001/control/campaigns")
+    return redirect(appConfig.appUrl+"control/campaigns")
 
 campaignsArray=[]
 famousArray=[]
@@ -24,7 +26,7 @@ def campaignsPage(request):
 
 
 def createNewCampaign(request):
-    return redirect("http://3.83.172.110:8001/campaigns/new")
+    return redirect(appConfig.appUrl+"campaigns/new")
 
 def showCampaign(request):
     notAddedFamous=[]
@@ -69,28 +71,30 @@ def showCampaign(request):
     }})
 
 def editCampaign(request):
-    editId=request.POST.get("id")
-    return render("ControlApp/campaign_edit.html",{"id":editId})
+    famousArray.clear()
+    campaign = firebase_config.firestore_client.collection("campaigns").document(str(request.GET.get('id'))).get().to_dict()
+    famous = firebase_config.firestore_client.collection("famous").stream()
+    for doc in famous:
+        fam=doc.to_dict()
+        if fam['name_en'] in campaign['famous'].keys():
+            continue
+        else:
+            famousArray.append({"name_ar":fam['name_ar'], "name_en":fam['name_en']})
+    return render(request,"ControlApp/campaign_edit.html",{"famousArray":famousArray, "campaign":campaign})
 
 def updateCampaign(request):
-    famousChoose:dict[str,int]={}
-    campaignId=request.GET.get("id")
+    id=request.GET.get("id")
+    famous_choose: dict[str, {str, int}] = {}
+    print(famousArray)
     for item in famousArray:
-        checkStatus=request.POST.get(item['name_en'])
-        if(checkStatus=="checked"):
-            famousChoose[item['name_en']]=0
-
-
-
-    for k,v in famousChoose.items():
-        print(k+"\n")
-
-    print(len(famousChoose))
-        # firebase_config.firestore_client.collection("campaigns").document(campaignId).set({
-        # "famous."+k:0
-        # })
-
-    return redirect(appConfig.appUrl+"control/campaigns")
+        itemstatus=request.POST.get(item["name_en"])
+        if (itemstatus == "checked"):
+            famous_choose[item['name_en']] = {"views": 0, "Browser": {}, "OS": {}, "device": {}}
+    print(famous_choose)
+    firebase_config.firestore_client.collection("campaigns").document(id).set({
+       "famous":famous_choose
+    },merge=True)
+    return redirect("127.0.0.1:8000/"+"control/campaigns")
 
 def famousPage(request):
     famousArray.clear()
@@ -103,4 +107,4 @@ def famousPage(request):
     return render(request,"ControlApp/famous.html",{"famousArray":famousArray})
 
 def addNewFamous(request):
-    return redirect("http://3.83.172.110:8001/famous/new")
+    return redirect(appConfig.appUrl+"famous/new")

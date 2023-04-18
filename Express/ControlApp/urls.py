@@ -7,8 +7,9 @@ urlpatterns=[
     path('campaigns/campaignShow',views.showCampaign),
     path('campaigns/newCampaign',views.createNewCampaign),
     path('campaigns/campaignShow',views.showCampaign),
+    path('campaigns/campaignEdit', views.editCampaign),
     path('campaigns/campaignUpdate',views.updateCampaign),
-    path('campaigns/campaignEdit',views.editCampaign),
+
 
     path('famous', views.famousPage),
     path('famous/newFamous', views.addNewFamous)
