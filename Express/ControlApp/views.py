@@ -94,7 +94,7 @@ def updateCampaign(request):
     firebase_config.firestore_client.collection("campaigns").document(id).set({
        "famous":famous_choose
     },merge=True)
-    return redirect(appConfig.appUrl+"control/campaigns")
+    return redirect(appConfig.appUrl+"control/campaigns/campaignShow?id="+id)
 
 def famousPage(request):
     famousArray.clear()
@@ -108,3 +108,6 @@ def famousPage(request):
 
 def addNewFamous(request):
     return redirect(appConfig.appUrl+"famous/new")
+
+def returnHomeControl():
+    return render(appConfig.appUrl+"control")

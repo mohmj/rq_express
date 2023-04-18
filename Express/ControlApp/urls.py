@@ -9,6 +9,7 @@ urlpatterns=[
     path('campaigns/campaignShow',views.showCampaign),
     path('campaigns/campaignEdit', views.editCampaign),
     path('campaigns/campaignUpdate',views.updateCampaign),
+    path('campaigns/home',views.returnHomeControl),
 
 
     path('famous', views.famousPage),
