@@ -55,31 +55,10 @@
         {% endif %}
       </td>
       <td>
-        <table>
-          <tr>
-            <td>
-             <form action="/control/campaigns/campaignShow?id={{campaign.name_en}}" method="post">
+         <form action="/control/campaigns/campaignEdit?id={{campaign.name_en}}" method="post">
           {% csrf_token %}
           <button type="submit" class="btn btn-primary" disabled>Show</button>
         </form>
-            </td>
-            <td>
-              <form action="/control/campaigns/campaignEdit?id={{campaign.name_en}}" method="post">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-warning" disabled>Edit</button>
-        </form>
-            </td>
-            <td>
-              <form action="/control/campaigns/campaignEdit?id={{campaign.name_en}}" method="post">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger" disabled>Delete</button>
-        </form>
-            </td>
-          </tr>
-        </table>
-
-
-
       </td>
     </tr>
 {% endfor %}
