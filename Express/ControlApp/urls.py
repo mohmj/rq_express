@@ -13,5 +13,6 @@ urlpatterns=[
 
 
     path('famous', views.famousPage),
-    path('famous/newFamous', views.addNewFamous)
+    path('famous/newFamous', views.addNewFamous),
+    path('famous/famousShow',views.showFamous),
 ]

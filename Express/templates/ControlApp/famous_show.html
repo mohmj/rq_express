@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block content %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">{{famous.name_ar}}</a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="http://3.83.172.110:8001/control/">Home</a>
+            </li>
+        </ul>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </ul>
+            <form class="d-flex" role="search" action="/control/famous/famousEdit?id={{famous.name_en}}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-outline-warning" type="submit" disabled>Edit</button>
+            </form>
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+
+<table class="table" style="text-align:center; vertical-align:center">
+    <tr>
+        <th>name</th>
+        <td style="text-align:center">{{famous.name_ar}}</td>
+        <th>id</th>
+        <td style="text-align:center">{{famous.name_en}}</td>
+    </tr>
+</table>
+<table class="table" style="text-align:center">
+    <tr>
+        {% if famous.snapchat %}
+         <th><i class="fa-brands fa-snapchat" style="color: #000000; padding:0px 5px 0px 5px"></i></th>
+        {% endif %}
+        {% if famous.instagram %}
+         <th><i class="fa-brands fa-instagram" style="color: #000000; padding:0px 5px 0px 5px"></i></th>
+        {% endif %}
+        {% if famous.twitter %}
+         <th><i class="fa-brands fa-twitter" style="color: #000000; padding:0px 5px 0px 5px"></i></th>
+        {% endif %}
+    </tr>
+    <tr>
+                {% if famous.snapchat %}
+                <td>{{famous.snapchat}}</td>
+                {% endif %}
+        {% if famous.instagram %}
+                <td>{{famous.instagram}}</td>
+        {% endif %}
+        {% if famous.twitter %}
+                <td>{{famous.twitter}}</td>
+        {% endif %}
+
+    </tr>
+</table>
+<table class="table" style="text-align:center;">
+    <tr>
+        <th colspan="8">Views</th>
+    </tr>
+    <tr>
+        <th>total</th>  <td>{{views.total}}</td>
+        <th><i class="fa-brands fa-apple" style="color: #000000;padding:0px 5px 0px 5px"></i></th>  <td>{{views.apple}}</td>
+        <th><i class="fa-brands fa-android" style="color: #000000;padding:0px 5px 0px 5px"></i></th>  <td>{{views.android}}</td>
+        <th>else</th>  <td>{{views.else}}</td>
+    </tr>
+</table>
+<table class="table table-hover" style="text-align:center; vertical-align:middle">
+    <thead>
+    <tr>
+        <th scope="col" rowspan="2" style="text-align:center; vertical-align:middle">id</th>
+        <th scope="col" rowspan="2" style="text-align:center; vertical-align:middle">Campaign</th>
+        <th scope="col" rowspan="2" style="text-align:center; vertical-align:middle">Company</th>
+        <th scope="col" colspan="4" style="text-align:center; vertical-align:middle">views</th>
+
+        <th scope="col" rowspan="2" style="text-align:center; vertical-align:middle">link</th>
+    </tr>
+    <tr>
+        <th>total</th>
+        <th><i class="fa-brands fa-apple" style="color: #000000;padding:0px 5px 0px 5px"></i></th>
+        <th><i class="fa-brands fa-android" style="color: #000000;padding:0px 5px 0px 5px"></i></th>
+        <th>else</th>
+    </tr>
+    </thead>
+
+
+        {% for campaign in campaigns %}
+        <tr>
+            <td>{{campaign.name_en}}</td>
+            <td>{{campaign.name_ar}}</td>
+            <td>{{campaign.company}}</td>
+            <td>{{campaign.views_total}}</td>
+            <td>{{campaign.views_apple}}</td>
+            <td>{{campaign.views_android}}</td>
+            <td>{{campaign.views_else}}</td>
+            <td style="text-align:left">http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{famous.name_en}}&website={{campaign.link}}</td>
+
+        </tr>
+        {% endfor %}
+</table>
+
+
+{% endblock %}

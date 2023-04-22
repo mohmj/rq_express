@@ -55,9 +55,9 @@
         {% endif %}
       </td>
       <td>
-         <form action="/control/campaigns/campaignEdit?id={{campaign.name_en}}" method="post">
+         <form action="/control/famous/famousShow?id={{famous.name_en}}" method="post">
           {% csrf_token %}
-          <button type="submit" class="btn btn-primary" disabled>Show</button>
+          <button type="submit" class="btn btn-primary">Show</button>
         </form>
       </td>
     </tr>

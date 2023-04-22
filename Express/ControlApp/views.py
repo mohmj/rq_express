@@ -106,8 +106,40 @@ def famousPage(request):
                                "instagram": famousDict['instagram'],"twitter": famousDict['twitter'],})
     return render(request,"ControlApp/famous.html",{"famousArray":famousArray})
 
+def showFamous(request):
+    campaignsArray.clear()
+    id=request.GET.get('id')
+    views={"total":0,"apple":0,"android":0,"else":0}
+    famous=firebase_config.firestore_client.collection("famous").document(id).get().to_dict()
+    campaigns=firebase_config.firestore_client.collection("campaigns").order_by("start_time", direction=firebase_config.firestore.Query.DESCENDING).stream()
+    for campaign in campaigns:
+        camp=campaign.to_dict()
+        for k,v in camp['famous'].items():
+            if k==id:
+                dic={"name_en":camp['name_en'],"name_ar":camp['name_ar'],"company":camp['company'],"link":camp['link'],
+                     "views_total":int(camp['famous'][id]['views']),
+                     }
+                views['total']+=dic['views_total']
+                if "Apple" in camp['famous'][id]["device"]:
+                    dic['views_apple'] = int(camp['famous'][id]["device"])
+                    views['apple']+=dic['views_apple']
+                else:
+                    dic['views_apple'] =0
+                if "Android" in camp['famous'][id]['OS']:
+                    dic['views_android'] = int(camp['famous'][id]['OS'])
+                    views['android']+=dic['views_android']
+                else:
+                    dic['views_android'] = 0
+                dic['views_else']=dic['views_total']-dic['views_apple']-dic['views_android']
+                views['else']+=dic['views_else']
+                campaignsArray.append(dic)
+                break
+
+    return render(request,"ControlApp/famous_show.html",{"famous":famous,"campaigns":campaignsArray, "views":views})
+
 def addNewFamous(request):
     return redirect(appConfig.appUrl+"famous/new")
 
 def returnHomeControl():
     return render(appConfig.appUrl+"control")
+
