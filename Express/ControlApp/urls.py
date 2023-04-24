@@ -15,4 +15,6 @@ urlpatterns=[
     path('famous', views.famousPage),
     path('famous/newFamous', views.addNewFamous),
     path('famous/famousShow',views.showFamous),
+    path('famous/famousEdit',views.editFamous),
+    path('famous/famousUpdate',views.updateFamous)
 ]

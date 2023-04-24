@@ -121,12 +121,12 @@ def showFamous(request):
                      }
                 views['total']+=dic['views_total']
                 if "Apple" in camp['famous'][id]["device"]:
-                    dic['views_apple'] = int(camp['famous'][id]["device"])
+                    dic['views_apple'] = int(camp['famous'][id]["device"]['Apple'])
                     views['apple']+=dic['views_apple']
                 else:
                     dic['views_apple'] =0
                 if "Android" in camp['famous'][id]['OS']:
-                    dic['views_android'] = int(camp['famous'][id]['OS'])
+                    dic['views_android'] = int(camp['famous'][id]['OS']['Android'])
                     views['android']+=dic['views_android']
                 else:
                     dic['views_android'] = 0
@@ -136,6 +136,20 @@ def showFamous(request):
                 break
 
     return render(request,"ControlApp/famous_show.html",{"famous":famous,"campaigns":campaignsArray, "views":views})
+
+def editFamous(request):
+    id=str(request.GET.get('id'))
+    famous=firebase_config.firestore_client.collection('famous').document(id).get().to_dict()
+    return render(request,"ControlApp/famous_edit.html",{"famous":famous})
+
+def updateFamous(request):
+    id=str(request.GET.get('id'))
+    firebase_config.firestore_client.collection("famous").document(id).set({
+       "snapchat":str(request.POST.get('snapchat')),
+       "instagram": str(request.POST.get('instagram')),
+       "twitter": str(request.POST.get('twitter')),
+    },merge=True)
+    return redirect("http://127.0.0.1:8000/control/famous")
 
 def addNewFamous(request):
     return redirect(appConfig.appUrl+"famous/new")

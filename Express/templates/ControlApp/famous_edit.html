@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Update famous</h3><br>
+<form action="/control/famous/famousUpdate?id={{famous.name_en}}" method="post">
+{% csrf_token %}
+    <div class="mb-3 form-control">
+        <h5>Name</h5>
+        <label for="name_English" class="form-label" aria-disabled="true">English</label>
+        <input id="name_English" name="name_English" value="{{famous.name_en}}" disabled>
+        <br>
+        <label for="name_Arabic" class="form-label">Arabic</label>
+        <input id="name_Arabic" name="name_Arabic" value="{{famous.name_ar}}" disabled>
+    </div>
+    <div class="mb-3 form-control">
+        <h5>Accounts</h5>
+        <label for="snapchat" class="form-label">snapchat</label>
+        <input id="snapchat" name="snapchat" type="text" value="{{famous.snapchat}}">
+        <br>
+        <label for="instagram" class="form-label">instagram</label>
+        <input id="instagram" name="instagram" type="text" value="{{famous.instagram}}">
+        <br>
+        <label for="twitter" class="form-label">twitter</label>
+        <input id="twitter" name="twitter" type="text" value="{{famous.twitter}}">
+        <br>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+{% endblock %}
