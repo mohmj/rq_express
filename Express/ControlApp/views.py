@@ -149,10 +149,10 @@ def updateFamous(request):
        "instagram": str(request.POST.get('instagram')),
        "twitter": str(request.POST.get('twitter')),
     },merge=True)
-    return redirect("http://127.0.0.1:8000/control/famous")
+    return render(request,"ControlApp/famous.html")
 
 def addNewFamous(request):
-    return redirect(appConfig.appUrl+"famous/new")
+    return render(request,"FamousApp/new_famous.html")
 
 def returnHomeControl():
     return render(appConfig.appUrl+"control")
