@@ -62,7 +62,7 @@
 
 <div>
 
-    <table class="table table-hover" style="text-align:center;">
+    <table class="table table-hover" style="text-align:center;vertical-align:middle;">
   <thead>
     <tr>
       <th scope="col" rowspan="2" style="vertical-align:middle;">id</th>
@@ -92,8 +92,49 @@
       <td style="text-align:center">{{fam.views.else}}</td>
 
         <td style="text-align:left;">
-                        http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}
-                    </td>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="snapchat-tab-{{fam.name_en}}" data-bs-toggle="tab" data-bs-target="#snapchat-tab-pane-{{fam.name_en}}" type="button" role="tab" aria-controls="snapchat-tab-pane-{{fam.name_en}}" aria-selected="true"><i class="fa-brands fa-snapchat" style="color: #000000;padding:0px 5px 0px 5px" ></i></button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="instagram-tab-{{fam.name_en}}" data-bs-toggle="tab" data-bs-target="#instagram-tab-pane-{{fam.name_en}}" type="button" role="tab" aria-controls="instagram-tab-pane-{{fam.name_en}}" aria-selected="false"><i class="fa-brands fa-instagram" style="color: #000000;padding:0px 5px 0px 5px" ></i></button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="twitter-tab-{{fam.name_en}}" data-bs-toggle="tab" data-bs-target="#twitter-tab-pane-{{fam.name_en}}" type="button" role="tab" aria-controls="twitter-tab-pane-{{fam.name_en}}" aria-selected="false"><i class="fa-brands fa-twitter" style="color: #000000;padding:0px 5px 0px 5px" ></i></button>
+  </li>
+ <li class="nav-item" role="presentation">
+    <button class="nav-link" id="tiktok-tab-{{fam.name_en}}" data-bs-toggle="tab" data-bs-target="#tiktok-tab-pane-{{fam.name_en}}" type="button" role="tab" aria-controls="tiktok-tab-pane-{{fam.name_en}}" aria-selected="false"><i class="fa-brands fa-tiktok" style="color: #000000;padding:0px 5px 0px 5px" ></i></button>
+  </li>
+                <li class="nav-item" role="presentation">
+    <button class="nav-link" id="youtube-tab-{{fam.name_en}}" data-bs-toggle="tab" data-bs-target="#youtube-tab-pane-{{fam.name_en}}" type="button" role="tab" aria-controls="youtube-tab-pane-{{fam.name_en}}" aria-selected="false"><i class="fa-brands fa-youtube" style="color: #000000;padding:0px 5px 0px 5px" ></i></button>
+  </li>
+                <li class="nav-item" role="presentation">
+    <button class="nav-link" id="facebook-tab-{{fam.name_en}}" data-bs-toggle="tab" data-bs-target="#facebook-tab-pane-{{fam.name_en}}" type="button" role="tab" aria-controls="facebook-tab-pane-{{fam.name_en}}" aria-selected="false"><i class="fa-brands fa-facebook" style="color: #000000;padding:0px 5px 0px 5px" ></i></button>
+  </li>
+
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="snapchat-tab-pane-{{fam.name_en}}" role="tabpanel" aria-labelledby="snapchat-tab-{{fam.name_en}}" tabindex="0">
+      http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=snapchat
+</div>
+  <div class="tab-pane fade" id="instagram-tab-pane-{{fam.name_en}}" role="tabpanel" aria-labelledby="instagram-tab-{{fam.name_en}}" tabindex="0">
+            http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=instagram
+  </div>
+  <div class="tab-pane fade" id="twitter-tab-pane-{{fam.name_en}}" role="tabpanel" aria-labelledby="twitter-tab-{{fam.name_en}}" tabindex="0">
+            http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=twitter
+  </div>
+      <div class="tab-pane fade" id="tiktok-tab-pane-{{fam.name_en}}" role="tabpanel" aria-labelledby="tiktok-tab-{{fam.name_en}}" tabindex="0">
+                http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=tiktok
+      </div>
+    <div class="tab-pane fade" id="youtube-tab-pane-{{fam.name_en}}" role="tabpanel" aria-labelledby="youtube-tab-{{fam.name_en}}" tabindex="0">
+                http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=youtube
+      </div>
+    <div class="tab-pane fade" id="facebook-tab-pane-{{fam.name_en}}" role="tabpanel" aria-labelledby="facebook-tab-{{fam.name_en}}" tabindex="0">
+                http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=facebook
+      </div>
+
+</div>
+        </td>
     </tr>
   {% endfor %}
   </tbody>
