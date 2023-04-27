@@ -36,19 +36,88 @@ def showCampaign(request):
 
     notAddedFamous=[]
     currentFamousArray=[]
-    viewstotal=0
-    viewsApple=0
-    viewsAndroid=0
-    viewsElse=0
+    views={
+        'total':0,
+        'apple':0,
+        'android':0,
+        'else':0,
+        'snapchat':{
+            'total': 0,
+            'apple': 0,
+            'android': 0,
+            'else': 0,
+        },
+        'instagram': {
+            'total': 0,
+            'apple': 0,
+            'android': 0,
+            'else': 0,
+        },
+        'twitter': {
+            'total': 0,
+            'apple': 0,
+            'android': 0,
+            'else': 0,
+        },
+        'tiktok': {
+            'total': 0,
+            'apple': 0,
+            'android': 0,
+            'else': 0,
+        },
+        'youtube': {
+            'total': 0,
+            'apple': 0,
+            'android': 0,
+            'else': 0,
+        },
+        'facebook': {
+            'total': 0,
+            'apple': 0,
+            'android': 0,
+            'else': 0,
+        },
+    }
+
+    viewsSnapshat=0
+    viewsInstagram=0
+    viewsTwitter=0
+    viewsTiktok=0
+    viewsYoutube=0
+    viewsFacebook=0
     for k,v in campaign['famous'].items():
         famous=firebase_config.firestore_client.collection("famous").document(str(k)).get().to_dict()
         totalViews=v['views']['total']
-        viewstotal+=totalViews
+        views['total']+=totalViews
         appleViews=v['views']['apple']
-        viewsApple+=appleViews
+        views['apple']+=appleViews
         androidViews=v['views']['android']
-        viewsAndroid+=androidViews
+        views['android']+=androidViews
         elseDevicesViews=totalViews-androidViews-appleViews
+        views['snapchat']['total']=v['views']['snapchat']['total']
+        views['snapchat']['apple']+=v['views']['snapchat']['apple']
+        views['snapchat']['android']+=v['views']['snapchat']['android']
+        views['snapchat']['else']+=v['views']['snapchat']['else']
+        views['instagram']['total'] = v['views']['instagram']['total']
+        views['instagram']['apple'] += v['views']['instagram']['apple']
+        views['instagram']['android'] += v['views']['instagram']['android']
+        views['instagram']['else'] += v['views']['instagram']['else']
+        views['twitter']['total'] = v['views']['twitter']['total']
+        views['twitter']['apple'] += v['views']['twitter']['apple']
+        views['twitter']['android'] += v['views']['twitter']['android']
+        views['twitter']['else'] += v['views']['twitter']['else']
+        views['tiktok']['total'] = v['views']['tiktok']['total']
+        views['tiktok']['apple'] += v['views']['tiktok']['apple']
+        views['tiktok']['android'] += v['views']['tiktok']['android']
+        views['tiktok']['else'] += v['views']['tiktok']['else']
+        views['youtube']['total'] = v['views']['youtube']['total']
+        views['youtube']['apple'] += v['views']['youtube']['apple']
+        views['youtube']['android'] += v['views']['youtube']['android']
+        views['youtube']['else'] += v['views']['youtube']['else']
+        views['facebook']['total'] = v['views']['facebook']['total']
+        views['facebook']['apple'] += v['views']['facebook']['apple']
+        views['facebook']['android'] += v['views']['facebook']['android']
+        views['facebook']['else'] += v['views']['facebook']['else']
         currentFamousArray.append({"name_en":str(k), "name_ar":famous['name_ar'], 'views':{
             'total':totalViews,
             'apple':appleViews,
@@ -91,19 +160,14 @@ def showCampaign(request):
                 'total':v['views']['facebook']['total'],
             },
         }})
-    viewsElse = viewstotal - viewsApple - viewsAndroid
+    views['else'] = views['total'] - views['apple'] - views['android']
     famous=firebase_config.firestore_client.collection("famous").stream()
     for doc in famous:
         fam=doc.to_dict()
         if any(fam['name_en'] in d.values() for d in currentFamousArray):
             continue
         notAddedFamous.append({"name_en":fam['name_en'], "name_ar":fam['name_ar']})
-    return render(request,"ControlApp/campaign_show.html",{"campaign":campaign,"currentFamousArray":currentFamousArray, "notAddedFamous":notAddedFamous, "views":{
-        "total":viewstotal,
-        "apple":viewsApple,
-        "android":viewsAndroid,
-        "else":viewsElse,
-    }})
+    return render(request,"ControlApp/campaign_show.html",{"campaign":campaign,"currentFamousArray":currentFamousArray, "notAddedFamous":notAddedFamous, "views":views})
 
 def editCampaign(request):
     famousArray.clear()
