@@ -20,8 +20,8 @@ def campaignsPage(request):
      docs = firebase_config.firestore_client.collection('campaigns').order_by("start_time", direction=firebase_config.firestore.Query.DESCENDING).stream()
      for doc in docs:
          campaignsDict = doc.to_dict()
-         start_time=datetime.datetime.fromtimestamp(campaignsDict['start_time'].timestamp(),pytz.timezone('Asia/Riyadh')).strftime("%m-%d-%Y")
-         campaignsArray.append({"company":campaignsDict['company'],"name_ar": campaignsDict['name_ar'], "name_en": campaignsDict['name_en'], "link":campaignsDict['link'], "start_time":start_time, "end_time":"0", "famous":campaignsDict['famous']})
+         campaignsDict['start_time']=datetime.datetime.fromtimestamp(campaignsDict['start_time'].timestamp(),pytz.timezone('Asia/Riyadh')).strftime("%m-%d-%Y")
+         campaignsArray.append(campaignsDict)
      return render(request,"ControlApp/campaigns.html",{"campaignsArray":campaignsArray})
 
 
@@ -29,9 +29,12 @@ def createNewCampaign(request):
     return redirect(appConfig.appUrl+"campaigns/new")
 
 def showCampaign(request):
+    campaign = firebase_config.firestore_client.collection("campaigns").document(
+        str(request.GET.get('id'))).get().to_dict()
+    campaign['start_time'] = datetime.datetime.fromtimestamp(campaign['start_time'].timestamp(),
+                                                             pytz.timezone('Asia/Riyadh')).strftime("%m-%d-%Y %H:%M:%S")
+
     notAddedFamous=[]
-    campaign=firebase_config.firestore_client.collection("campaigns").document(str(request.GET.get('id'))).get().to_dict()
-    campaign['start_time']=datetime.datetime.fromtimestamp(campaign['start_time'].timestamp(),pytz.timezone('Asia/Riyadh')).strftime("%m-%d-%Y %H:%M:%S")
     currentFamousArray=[]
     viewstotal=0
     viewsApple=0
@@ -39,24 +42,56 @@ def showCampaign(request):
     viewsElse=0
     for k,v in campaign['famous'].items():
         famous=firebase_config.firestore_client.collection("famous").document(str(k)).get().to_dict()
-        totalViews=v["views"]
+        totalViews=v['views']['total']
         viewstotal+=totalViews
-        appleViews=0
-        androidViews=0
-        if "Apple" in v["device"]:
-            appleViews = int(v['device']['Apple'])
-            viewsApple+=appleViews
-        if "Android" in v['OS']:
-            androidViews = v['OS']['Android']
-            viewsAndroid+=androidViews
+        appleViews=v['views']['apple']
+        viewsApple+=appleViews
+        androidViews=v['views']['android']
+        viewsAndroid+=androidViews
         elseDevicesViews=totalViews-androidViews-appleViews
-        viewsElse=viewstotal-viewsApple-viewsAndroid
         currentFamousArray.append({"name_en":str(k), "name_ar":famous['name_ar'], 'views':{
             'total':totalViews,
             'apple':appleViews,
             'android':androidViews,
-            'else':elseDevicesViews
+            'else':elseDevicesViews,
+            'snapchat':{
+                'apple':v['views']['snapchat']['apple'],
+                'android':v['views']['snapchat']['android'],
+                'else':v['views']['snapchat']['else'],
+                'total':v['views']['snapchat']['total'],
+            },
+            'instagram':{
+                'apple':v['views']['instagram']['apple'],
+                'android':v['views']['instagram']['android'],
+                'else':v['views']['instagram']['else'],
+                'total':v['views']['instagram']['total'],
+            },
+            'twitter': {
+                'apple':v['views']['twitter']['apple'],
+                'android':v['views']['twitter']['android'],
+                'else':v['views']['twitter']['else'],
+                'total':v['views']['twitter']['total'],
+            },
+            'tiktok':{
+                'apple':v['views']['tiktok']['apple'],
+                'android':v['views']['tiktok']['android'],
+                'else':v['views']['tiktok']['else'],
+                'total':v['views']['tiktok']['total'],
+            },
+            'youtube': {
+                'apple':v['views']['youtube']['apple'],
+                'android':v['views']['youtube']['android'],
+                'else':v['views']['youtube']['else'],
+                'total':v['views']['youtube']['total'],
+            },
+            'facebook': {
+                'apple':v['views']['facebook']['apple'],
+                'android':v['views']['facebook']['android'],
+                'else':v['views']['facebook']['else'],
+                'total':v['views']['facebook']['total'],
+            },
         }})
+    viewsElse = viewstotal - viewsApple - viewsAndroid
     famous=firebase_config.firestore_client.collection("famous").stream()
     for doc in famous:
         fam=doc.to_dict()
@@ -84,12 +119,53 @@ def editCampaign(request):
 
 def updateCampaign(request):
     id=request.GET.get("id")
-    famous_choose: dict[str, {str, int}] = {}
+    famous_choose= {}
     print(famousArray)
     for item in famousArray:
         itemstatus=request.POST.get(item["name_en"])
         if (itemstatus == "checked"):
-            famous_choose[item['name_en']] = {"views": 0, "Browser": {}, "OS": {}, "device": {}}
+            famous_choose[item['name_en']] = {"views":{
+                'apple':0,
+                'android':0,
+                'else':0,
+                'total':0,
+                'snapchat':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+                'instagram':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+                'twitter':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+                'tiktok':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+                'youtube':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+                'facebook':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+            }}
     print(famous_choose)
     firebase_config.firestore_client.collection("campaigns").document(id).set({
        "famous":famous_choose

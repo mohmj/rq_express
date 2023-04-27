@@ -3,7 +3,6 @@ from django.http import HttpResponse
 import datetime
 import firebase_config
 # Create your views here.
-from django_user_agents.utils import get_user_agent
 famous_array=[]
 def newCampaign(request):
     docs=firebase_config.firestore_client.collection('famous').stream()
@@ -13,8 +12,6 @@ def newCampaign(request):
     return render(request,"CampaignsApp/new_campaign.html",{'famous_array':famous_array})
 
 def createNewCampaign(request):
-    user_agent=get_user_agent(request)
-    # return HttpResponse("<h3>"+str(user_agent.device)+"</h3>\n<h3>"+str(user_agent.browser)+"</h3>\n<h3>"+str(user_agent.os)+"</h3>")
     name_arabic=request.POST.get('name_Arabic')
     name_english=request.POST.get('name_English')
     link=request.POST.get('link')
@@ -23,8 +20,48 @@ def createNewCampaign(request):
     for item in famous_array:
         itemstatus=request.POST.get(item["name_en"])
         if(itemstatus=="checked"):
-            # print(item["name_en"])
-            famous_choose[item['name_en']]={"views":0,"Browser":{},"OS":{},"device":{}}
+            famous_choose[item['name_en']]={"views":{
+                'apple':0,
+                'android':0,
+                'else':0,
+                'total':0,
+                'snapchat':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+                'instagram':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+                'twitter':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+                'tiktok':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+                'youtube':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+                'facebook':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+            }}
     famous_array.clear()
     firebase_config.firestore_client.collection("campaigns").document(name_english).set({
         "name_ar":name_arabic,

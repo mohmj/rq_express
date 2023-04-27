@@ -68,7 +68,7 @@
       <th scope="col" rowspan="2" style="vertical-align:middle;">id</th>
       <th scope="col" rowspan="2" style="vertical-align:middle;">name</th>
            <th scope="col" colspan="4">views</th>
-      <th scope="col" rowspan="2" style="vertical-align:middle;">link</th>
+      <th scope="col" rowspan="2" style="vertical-align:middle;">platforms</th>
     </tr>
     <tr>
 <!--        <th></th>-->
@@ -115,23 +115,109 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="snapchat-tab-pane-{{fam.name_en}}" role="tabpanel" aria-labelledby="snapchat-tab-{{fam.name_en}}" tabindex="0">
-      http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=snapchat
-</div>
+    <table style="text-align:center;vertical-align:middle;">
+        <tr>
+            <th scope="col" style="text-align:center">total</th>
+      <th scope="col" style="text-align:center"><i class="fa-brands fa-apple" style="color: #000000;padding:0px 5px 0px 5px" ></i></th>
+      <th scope="col"  style="text-align:center"><i class="fa-brands fa-android" style="color: #000000;padding:0px 5px 0px 5px"></i></th>
+      <th scope="col" style="text-align:center">else</th>
+            <td rowspan="2" style="text-alignment:left; padding-left:10px;">http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=snapchat</td>
+        </tr>
+        <tr>
+            <td>{{fam.views.snapchat.total}}</td>
+            <td>{{fam.views.snapchat.apple}}</td>
+            <td>{{fam.views.snapchat.android}}</td>
+            <td>{{fam.views.snapchat.else}}</td>
+
+        </tr>
+    </table>
+  </div>
   <div class="tab-pane fade" id="instagram-tab-pane-{{fam.name_en}}" role="tabpanel" aria-labelledby="instagram-tab-{{fam.name_en}}" tabindex="0">
-            http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=instagram
+<table style="text-align:center;vertical-align:middle;">
+        <tr>
+            <th scope="col" style="text-align:center">total</th>
+      <th scope="col" style="text-align:center"><i class="fa-brands fa-apple" style="color: #000000;padding:0px 5px 0px 5px" ></i></th>
+      <th scope="col"  style="text-align:center"><i class="fa-brands fa-android" style="color: #000000;padding:0px 5px 0px 5px"></i></th>
+      <th scope="col" style="text-align:center">else</th>
+            <td rowspan="2" style="text-alignment:left; padding-left:10px;">http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=instagram</td>
+        </tr>
+        <tr>
+            <td>{{fam.views.instagram.total}}</td>
+            <td>{{fam.views.instagram.apple}}</td>
+            <td>{{fam.views.instagram.android}}</td>
+            <td>{{fam.views.instagram.else}}</td>
+
+        </tr>
+    </table>
   </div>
   <div class="tab-pane fade" id="twitter-tab-pane-{{fam.name_en}}" role="tabpanel" aria-labelledby="twitter-tab-{{fam.name_en}}" tabindex="0">
-            http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=twitter
-  </div>
+<table style="text-align:center;vertical-align:middle;">
+        <tr>
+            <th scope="col" style="text-align:center">total</th>
+      <th scope="col" style="text-align:center"><i class="fa-brands fa-apple" style="color: #000000;padding:0px 5px 0px 5px" ></i></th>
+      <th scope="col"  style="text-align:center"><i class="fa-brands fa-android" style="color: #000000;padding:0px 5px 0px 5px"></i></th>
+      <th scope="col" style="text-align:center">else</th>
+            <td rowspan="2" style="text-alignment:left; padding-left:10px;">http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=twitter</td>
+        </tr>
+        <tr>
+            <td>{{fam.views.twitter.total}}</td>
+            <td>{{fam.views.twitter.apple}}</td>
+            <td>{{fam.views.twitter.android}}</td>
+            <td>{{fam.views.twitter.else}}</td>
+
+        </tr>
+    </table>    </div>
       <div class="tab-pane fade" id="tiktok-tab-pane-{{fam.name_en}}" role="tabpanel" aria-labelledby="tiktok-tab-{{fam.name_en}}" tabindex="0">
-                http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=tiktok
-      </div>
+<table style="text-align:center;vertical-align:middle;">
+        <tr>
+            <th scope="col" style="text-align:center">total</th>
+      <th scope="col" style="text-align:center"><i class="fa-brands fa-apple" style="color: #000000;padding:0px 5px 0px 5px" ></i></th>
+      <th scope="col"  style="text-align:center"><i class="fa-brands fa-android" style="color: #000000;padding:0px 5px 0px 5px"></i></th>
+      <th scope="col" style="text-align:center">else</th>
+            <td rowspan="2" style="text-alignment:left; padding-left:10px;">http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=tiktok</td>
+        </tr>
+        <tr>
+            <td>{{fam.views.tiktok.total}}</td>
+            <td>{{fam.views.tiktok.apple}}</td>
+            <td>{{fam.views.tiktok.android}}</td>
+            <td>{{fam.views.tiktok.else}}</td>
+
+        </tr>
+    </table>      </div>
     <div class="tab-pane fade" id="youtube-tab-pane-{{fam.name_en}}" role="tabpanel" aria-labelledby="youtube-tab-{{fam.name_en}}" tabindex="0">
-                http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=youtube
-      </div>
+<table style="text-align:center;vertical-align:middle;">
+        <tr>
+            <th scope="col" style="text-align:center">total</th>
+      <th scope="col" style="text-align:center"><i class="fa-brands fa-apple" style="color: #000000;padding:0px 5px 0px 5px" ></i></th>
+      <th scope="col"  style="text-align:center"><i class="fa-brands fa-android" style="color: #000000;padding:0px 5px 0px 5px"></i></th>
+      <th scope="col" style="text-align:center">else</th>
+            <td rowspan="2" style="text-alignment:left; padding-left:10px;">http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=youtube</td>
+        </tr>
+        <tr>
+            <td>{{fam.views.youtube.total}}</td>
+            <td>{{fam.views.youtube.apple}}</td>
+            <td>{{fam.views.youtube.android}}</td>
+            <td>{{fam.views.youtube.else}}</td>
+
+        </tr>
+    </table>            </div>
     <div class="tab-pane fade" id="facebook-tab-pane-{{fam.name_en}}" role="tabpanel" aria-labelledby="facebook-tab-{{fam.name_en}}" tabindex="0">
-                http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=facebook
-      </div>
+<table style="text-align:center;vertical-align:middle;">
+        <tr>
+            <th scope="col" style="text-align:center">total</th>
+      <th scope="col" style="text-align:center"><i class="fa-brands fa-apple" style="color: #000000;padding:0px 5px 0px 5px" ></i></th>
+      <th scope="col"  style="text-align:center"><i class="fa-brands fa-android" style="color: #000000;padding:0px 5px 0px 5px"></i></th>
+      <th scope="col" style="text-align:center">else</th>
+            <td rowspan="2" style="text-alignment:left; padding-left:10px;">http://3.83.172.110:8001?campaign={{campaign.name_en}}&famous={{fam.name_en}}&website={{campaign.link}}&platform=facebook</td>
+        </tr>
+        <tr>
+            <td>{{fam.views.facebook.total}}</td>
+            <td>{{fam.views.facebook.apple}}</td>
+            <td>{{fam.views.facebook.android}}</td>
+            <td>{{fam.views.facebook.else}}</td>
+
+        </tr>
+    </table>                 </div>
 
 </div>
         </td>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 import firebase_config
 from django_user_agents.utils import get_user_agent
 
@@ -17,23 +17,30 @@ def RedirectFunction(request):
     famous = request.GET.get("famous") or "no famous assigned"
     website = request.GET.get("website")
     campaign=request.GET.get("campaign")
+    platformUse=request.GET.get("platform")
+    device=""
+    if(user_agent.device.brand=="Apple"):
+        device="apple"
+    elif(user_agent.os.family=="Android"):
+        device="android"
+    else:
+        device="else"
+
     firebase_config.firestore_client.collection("campaigns").document(campaign).set({
         "famous":{
-            famous: {
-                "views": firebase_config.Increment(1),
-                "device": {str(user_agent.device.brand): firebase_config.Increment(1)},
-                "Browser": {str(user_agent.browser.family): firebase_config.Increment(1)},
-                "OS": {str(user_agent.os.family): firebase_config.Increment(1)},
+            famous:{
+                "views":{
+                    "total":firebase_config.Increment(1),
+                    device:firebase_config.Increment(1),
+                    platformUse:{
+                        device:firebase_config.Increment(1),
+                        'total':firebase_config.Increment(1),
+                    }
+                }
             }
         }
-
     }, merge=True)
-    firebase_config.firestore_client.collection("famous").document(famous).update({
-        "campaigns."+campaign: firebase_config.Increment(1)
-    })
-
     return redirect(website)
-    # return render(request,"RedirectApp_index.html",{"famous":famous,"website":website})
 
 def LoginPage(request):
     return render(request, "login_page.html")
