@@ -249,33 +249,86 @@ def famousPage(request):
 def showFamous(request):
     campaignsArray.clear()
     id=request.GET.get('id')
-    views={"total":0,"apple":0,"android":0,"else":0}
+    views={
+                'apple':0,
+                'android':0,
+                'else':0,
+                'total':0,
+                'snapchat':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+                'instagram':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+                'twitter':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+                'tiktok':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+                'youtube':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+                'facebook':{
+                    'apple':0,
+                    'android':0,
+                    'else':0,
+                    'total':0
+                },
+            }
     famous=firebase_config.firestore_client.collection("famous").document(id).get().to_dict()
     campaigns=firebase_config.firestore_client.collection("campaigns").order_by("start_time", direction=firebase_config.firestore.Query.DESCENDING).stream()
     for campaign in campaigns:
         camp=campaign.to_dict()
         for k,v in camp['famous'].items():
             if k==id:
-                dic={"name_en":camp['name_en'],"name_ar":camp['name_ar'],"company":camp['company'],"link":camp['link'],
-                     "views_total":int(camp['famous'][id]['views']),
-                     }
-                views['total']+=dic['views_total']
-                if "Apple" in camp['famous'][id]["device"]:
-                    dic['views_apple'] = int(camp['famous'][id]["device"]['Apple'])
-                    views['apple']+=dic['views_apple']
-                else:
-                    dic['views_apple'] =0
-                if "Android" in camp['famous'][id]['OS']:
-                    dic['views_android'] = int(camp['famous'][id]['OS']['Android'])
-                    views['android']+=dic['views_android']
-                else:
-                    dic['views_android'] = 0
-                dic['views_else']=dic['views_total']-dic['views_apple']-dic['views_android']
-                views['else']+=dic['views_else']
-                campaignsArray.append(dic)
+                campaignsArray.append(camp)
+                views['total'] += v['views']['total']
+                views['apple'] += v['views']['apple']
+                views['android'] += v['views']['android']
+                views['else'] += v['views']['else']
+                views['snapchat']['total'] = v['views']['snapchat']['total']
+                views['snapchat']['apple'] += v['views']['snapchat']['apple']
+                views['snapchat']['android'] += v['views']['snapchat']['android']
+                views['snapchat']['else'] += v['views']['snapchat']['else']
+                views['instagram']['total'] = v['views']['instagram']['total']
+                views['instagram']['apple'] += v['views']['instagram']['apple']
+                views['instagram']['android'] += v['views']['instagram']['android']
+                views['instagram']['else'] += v['views']['instagram']['else']
+                views['twitter']['total'] = v['views']['twitter']['total']
+                views['twitter']['apple'] += v['views']['twitter']['apple']
+                views['twitter']['android'] += v['views']['twitter']['android']
+                views['twitter']['else'] += v['views']['twitter']['else']
+                views['tiktok']['total'] = v['views']['tiktok']['total']
+                views['tiktok']['apple'] += v['views']['tiktok']['apple']
+                views['tiktok']['android'] += v['views']['tiktok']['android']
+                views['tiktok']['else'] += v['views']['tiktok']['else']
+                views['youtube']['total'] = v['views']['youtube']['total']
+                views['youtube']['apple'] += v['views']['youtube']['apple']
+                views['youtube']['android'] += v['views']['youtube']['android']
+                views['youtube']['else'] += v['views']['youtube']['else']
+                views['facebook']['total'] = v['views']['facebook']['total']
+                views['facebook']['apple'] += v['views']['facebook']['apple']
+                views['facebook']['android'] += v['views']['facebook']['android']
+                views['facebook']['else'] += v['views']['facebook']['else']
                 break
 
-    return render(request,"ControlApp/famous_show.html",{"famous":famous,"campaigns":campaignsArray, "views":views})
+    return render(request,"ControlApp/famous_show.html",{'id':id,"famous":famous,"campaigns":campaignsArray, "views":views})
 
 def editFamous(request):
     id=str(request.GET.get('id'))

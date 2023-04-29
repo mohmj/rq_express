@@ -58,15 +58,61 @@
 
     </tr>
 </table>
-<table class="table" style="text-align:center;">
+<table class="table" style="text-align:center; vertical-align:center">
+    <thead>
     <tr>
-        <th colspan="8">Views</th>
+        <th style="text-align:center;" colspan="8">views</th>
     </tr>
     <tr>
-        <th>total</th>  <td>{{views.total}}</td>
-        <th><i class="fa-brands fa-apple" style="color: #000000;padding:0px 5px 0px 5px"></i></th>  <td>{{views.apple}}</td>
-        <th><i class="fa-brands fa-android" style="color: #000000;padding:0px 5px 0px 5px"></i></th>  <td>{{views.android}}</td>
-        <th>else</th>  <td>{{views.else}}</td>
+        <th>Device / Platform</th>
+         <th scope="col" style="text-align:center"><i class="fa-brands fa-snapchat" style="color: #000000;padding:0px 5px 0px 5px" ></i></th>
+         <th scope="col" style="text-align:center"><i class="fa-brands fa-instagram" style="color: #000000;padding:0px 5px 0px 5px" ></i></th>
+         <th scope="col" style="text-align:center"><i class="fa-brands fa-twitter" style="color: #000000;padding:0px 5px 0px 5px" ></i></th>
+         <th scope="col" style="text-align:center"><i class="fa-brands fa-tiktok" style="color: #000000;padding:0px 5px 0px 5px" ></i></th>
+         <th scope="col" style="text-align:center"><i class="fa-brands fa-youtube" style="color: #000000;padding:0px 5px 0px 5px" ></i></th>
+         <th scope="col" style="text-align:center"><i class="fa-brands fa-facebook" style="color: #000000;padding:0px 5px 0px 5px" ></i></th>
+        <th scope="col" style="text-align:center">total</th>
+    </tr>
+    </thead>
+    <tr>
+         <th scope="row" style="text-align:center"><i class="fa-brands fa-apple" style="color: #000000;padding:0px 5px 0px 5px" ></i></th>
+         <td>{{views.snapchat.apple}}</td>
+         <td>{{views.instagram.apple}}</td>
+         <td>{{views.twitter.apple}}</td>
+         <td>{{views.tiktok.apple}}</td>
+         <td>{{views.youtube.apple}}</td>
+         <td>{{views.facebook.apple}}</td>
+         <td>{{views.apple}}</td>
+    </tr>
+    <tr>
+         <th scope="row" style="text-align:center"><i class="fa-brands fa-android" style="color: #000000;padding:0px 5px 0px 5px" ></i></th>
+         <td>{{views.snapchat.android}}</td>
+         <td>{{views.instagram.android}}</td>
+         <td>{{views.twitter.android}}</td>
+         <td>{{views.tiktok.android}}</td>
+         <td>{{views.youtube.android}}</td>
+         <td>{{views.facebook.android}}</td>
+         <td>{{views.android}}</td>
+    </tr>
+    <tr>
+         <th scope="row" style="text-align:center">else</th>
+         <td>{{views.snapchat.else}}</td>
+         <td>{{views.instagram.else}}</td>
+         <td>{{views.twitter.else}}</td>
+         <td>{{views.tiktok.else}}</td>
+         <td>{{views.youtube.else}}</td>
+         <td>{{views.facebook.else}}</td>
+         <td>{{views.else}}</td>
+    </tr>
+    <tr>
+         <th scope="row" style="text-align:center">total</th>
+         <td>{{views.snapchat.total}}</td>
+         <td>{{views.instagram.total}}</td>
+         <td>{{views.twitter.total}}</td>
+         <td>{{views.tiktok.total}}</td>
+         <td>{{views.youtube.total}}</td>
+         <td>{{views.facebook.total}}</td>
+         <td class="table-active">{{views.total}}</td>
     </tr>
 </table>
 <table class="table table-hover" style="text-align:center; vertical-align:middle">
@@ -93,8 +139,9 @@
             <td>{{campaign.name_en}}</td>
             <td>{{campaign.name_ar}}</td>
             <td>{{campaign.company}}</td>
-            <td>{{campaign.views_total}}</td>
-            <td>{{campaign.views_apple}}</td>
+            <td>{{campaign.famous.id}}</td>
+            <td>{{campaign.famous.views.total}}</td>
+            <td>{{campaign.famous.id.views.apple}}</td>
             <td>{{campaign.views_android}}</td>
             <td>{{campaign.views_else}}</td>
         <td style="text-align:left;">
