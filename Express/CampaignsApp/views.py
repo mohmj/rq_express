@@ -72,5 +72,5 @@ def createNewCampaign(request):
         "company":company,
     })
 
-    return redirect("http://3.83.172.110:8001/control/campaigns")
+    return redirect("http://3.82.176.22:8000/control/campaigns")
 
