@@ -24,6 +24,7 @@
 <table class="table table-striped" style="text-align:center">
     <thead>
     <tr>
+        <th scope="col">ID</th>
         <th scope="col">Campaign</th>
         <th scope="col">Company</th>
         <th scope="col">Date</th>
@@ -33,10 +34,11 @@
     <tbody class="">
     {% for campaign in campaignsArray %}
     <tr>
+        <th scope="row">{{campaign.name_en}}</th>
         <th scope="row">{{campaign.name_ar}}</th>
-        <td>{{campaign.company}}</td>
-        <td>{{campaign.start_time}}</td>
-        <td>
+        <td scope="row">{{campaign.company}}</td>
+        <td scope="row">{{campaign.start_time}}</td>
+        <td scope="row">
             <form action="/control/campaigns/campaignShow?id={{campaign.name_en}}" method="post">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-primary" >Show</button>
